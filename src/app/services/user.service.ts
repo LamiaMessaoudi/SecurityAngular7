@@ -12,8 +12,9 @@ export class UserService {
   request: HttpRequest<any>
   private listUsers: User[] = [];
   public UsersSubjet = new Subject<User[]>();
-  private user: User;
+  private user: User=new User();
   public UserSubjet = new Subject<User>();
+  public iduser:number;
   constructor(              private tokenStorage: TokenStorageService,
                             private httpClient: HttpClient) {
     this.getAllUsers();
@@ -23,6 +24,7 @@ export class UserService {
   emitUsers() {
     this.UsersSubjet.next(this.listUsers.slice());
   }
+ 
   getAllUsers() {
     var reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -30,7 +32,6 @@ export class UserService {
    });
     this.httpClient.get('http://localhost:1111/api/admin/findAllUsers', { headers: reqHeader }).subscribe(
       (res: any[]) => {
-        console.log(res);
         this.listUsers = res;
         this.emitUsers();
       });
@@ -41,8 +42,8 @@ export class UserService {
     'Content-Type': 'application/json',
     'Authorization': 'access ' + this.tokenStorage.getToken()
  });
-  console.log("lamia");
-  console.log(id);
+ 
+  
   return this.httpClient.delete('http://localhost:1111/api/admin/deleteUser/'+id, { headers: reqHeader })
   .pipe(map(any=>{
       console.log("succes");
@@ -51,11 +52,8 @@ export class UserService {
 }
 updateUser(donn:FormData,idPost:number)
 {
-  var reqHeader = new HttpHeaders({ 
-    'Content-Type': 'application/json',
-    'Authorization': 'access ' + this.tokenStorage.getToken()
- });
-  return this.httpClient.put('http://localhost:1111/api/admin/updateUser/'+idPost,donn, { headers: reqHeader })
+ 
+  return this.httpClient.put('http://localhost:1111/api/auth/updateUser/'+idPost,donn)
   .pipe(map(res=>{
    
 
@@ -65,5 +63,20 @@ updateUser(donn:FormData,idPost:number)
      
   }));
 }
+getCurrentUser()
+{
+  const username=this.tokenStorage.getUsername();
+  return new Promise((resolve, reject) => {
+  this.httpClient.get('http://localhost:1111/api/auth/getUser/'+username).subscribe(
+    (res: any[])=>{
+        resolve(res);
+       this.iduser=res['id'];
+       console.log('hello' + this.iduser);
+        },
+      (erreur)=>{ // Error
+        reject(erreur);
+    });
 
+});
+}
 }
