@@ -11,8 +11,8 @@ export class SignatureService {
   SignDocument(don:FormData)
   {
     return this.httpClient.post(`http://localhost:1111/api/auth/signer`,don)
-          .pipe(map(res => {
-           
+          .pipe(map((res : any[]) => {
+           console.log(res);
           }));
   }
 
