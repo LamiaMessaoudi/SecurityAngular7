@@ -22,11 +22,15 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { ChangeRoleComponent } from './admin/change-role/change-role.component';
 import { ModalChangeRoleComponent } from './admin/modal-change-role/modal-change-role.component';
 import { ProfilComponent } from './User/profil/profil.component';
+import { SignatureComponent } from './User/signature/signature.component';
+import { VerificationComponent } from './User/verification/verification.component';
 
 const appRoutes: Routes = [
   {path: 'auth/signin' , component: SigninComponent},
   {path: 'auth/signup' , component: SignupComponent},
   {path: 'listUser/addUser' , component: AddUserComponent},
+  {path: 'user/signature' , component: SignatureComponent},
+  {path: 'user/verification' , component: VerificationComponent},
 
   {path: 'listUser' , component: ListUserComponent},
   {path: 'changeRole' , component:ChangeRoleComponent},
@@ -48,7 +52,9 @@ const appRoutes: Routes = [
     DeleteUserComponent,
     ChangeRoleComponent,
     ModalChangeRoleComponent,
-    ProfilComponent
+    ProfilComponent,
+    SignatureComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,
