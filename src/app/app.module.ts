@@ -36,7 +36,7 @@ const appRoutes: Routes = [
   {path: 'listUser' , component: ListUserComponent},
   {path: 'changeRole' , component:ChangeRoleComponent},
   {path: 'espaceUser' , component:ProfilComponent},
-
+  {path: '**' , component: SigninComponent},
 
 ]
 @NgModule({
