@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../Model/User';
 import {UserService} from '../services/user.service';
-import { TokenStorageService } from '../services/token-storage.service';
-import {Route, Router} from '../../../node_modules/@angular/router';
+import {TokenStorageService} from '../services/token-storage.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: 'app-header-admin',
+  templateUrl: './header-admin.component.html',
+  styleUrls: ['./header-admin.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderAdminComponent implements OnInit {
+
   users: User ;
 
   constructor( private userService: UserService,
-                private tokenStorage:TokenStorageService,
-                private router: Router,
-              ) {this.getCurrentUser(); }
+    private tokenStorage:TokenStorageService,
+    private router: Router) {this.getCurrentUser(); }
 
   ngOnInit() {
     this.getCurrentUser();

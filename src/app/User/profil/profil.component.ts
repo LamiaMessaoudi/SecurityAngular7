@@ -29,12 +29,12 @@ export class ProfilComponent implements OnInit {
               private userService: UserService)
                {
                  this.getCurrentUser();
-                 this.getId();
+          
               }
 ngOnInit() {
     this.initForm();
     this.getCurrentUser();
-    this.getId();
+  
   }
   get f() { return this.UpdateUser.controls; }
   initForm() {
@@ -69,7 +69,7 @@ ngOnInit() {
         this.UpdateUser.get('Name').setValue(this.users.name);
         this.UpdateUser.get('Email').setValue(this.users.email);
         this.UpdateUser.get('Username').setValue(this.users.username);
-
+        console.log(this.users.id);
         
       }
     );
@@ -104,11 +104,7 @@ ngOnInit() {
  );
  
   }
-  getId()
-  {
-    this.idUserCurrent=this.userService.iduser;
-    
-  }
+
  
  }
  

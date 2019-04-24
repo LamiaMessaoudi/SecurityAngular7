@@ -65,9 +65,13 @@ updateUser(donn:FormData,idPost:number)
 }
 getCurrentUser()
 {
+  var reqHeader = new HttpHeaders({ 
+    'Content-Type': 'application/json',
+    'Authorization': 'access ' + this.tokenStorage.getToken()
+ });
   const username=this.tokenStorage.getUsername();
   return new Promise((resolve, reject) => {
-  this.httpClient.get('http://localhost:1111/api/auth/getUser/'+username).subscribe(
+  this.httpClient.get('http://localhost:1111/api/admin/getUser/'+username, { headers: reqHeader }).subscribe(
     (res: any[])=>{
         resolve(res);
        this.iduser=res['id'];

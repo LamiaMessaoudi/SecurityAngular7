@@ -24,6 +24,7 @@ import { ModalChangeRoleComponent } from './admin/modal-change-role/modal-change
 import { ProfilComponent } from './User/profil/profil.component';
 import { SignatureComponent } from './User/signature/signature.component';
 import { VerificationComponent } from './User/verification/verification.component';
+import { HeaderAdminComponent } from './header-admin/header-admin.component';
 
 const appRoutes: Routes = [
   {path: 'auth/signin' , component: SigninComponent},
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     ModalChangeRoleComponent,
     ProfilComponent,
     SignatureComponent,
-    VerificationComponent
+    VerificationComponent,
+    HeaderAdminComponent
   ],
   imports: [
     BrowserModule,

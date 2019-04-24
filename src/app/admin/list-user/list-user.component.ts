@@ -26,7 +26,6 @@ export class ListUserComponent implements OnInit {
   { this.getUsers(); }
 
   ngOnInit() {
-    this.getUsers();
   }
   getUsers() {
     this.userService.emitUsers();

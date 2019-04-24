@@ -36,7 +36,7 @@
             <h1 class="text-base text-primary text-uppercase mb-4">Server Cryptography</h1>
             <h2 class="mb-4">Sign Up</h2>
             <p class="text-muted">To Sign Up ,please fill all the inputs.</p>
-            <div *ngIf="valid" class="alert alert-danger">Invalid Email ,Email exits </div>
+            <div *ngIf="valid" class="alert alert-danger">Username exits  Or Email exits </div>
             <form id="signupForm"  [formGroup]="signupForm"  (ngSubmit)="onSubmit()" class="mt-4">
 
 
