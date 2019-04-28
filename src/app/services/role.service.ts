@@ -4,6 +4,7 @@ import {User} from '../Model/User';
 import {Subject} from 'rxjs';
 import {TokenStorageService} from './token-storage.service';
 import {map} from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class RoleService {
       'Content-Type': 'application/json',
       'Authorization': 'access ' + this.tokenStorage.getToken()
    });
-    this.httpClient.get('http://localhost:1111/api/admin/findAllUser',{ headers: reqHeader }).subscribe(
+    this.httpClient.get(environment.apiUrl+'api/admin/findAllUser',{ headers: reqHeader }).subscribe(
       (res: any[]) => {
         console.log(res);
         this.listUsers = res;
@@ -45,7 +46,7 @@ ChangeRole(idUser:number)
     'Content-Type': 'application/json',
     'Authorization': 'access ' + this.tokenStorage.getToken()
  });
-  return this.httpClient.put('http://localhost:1111/api/admin/changeRole/'+idUser,"",{ headers: reqHeader })
+  return this.httpClient.put(environment.apiUrl+'api/admin/changeRole/'+idUser,"",{ headers: reqHeader })
   .pipe(map(any=>{
       console.log("succes");
       this.getAllUsers();

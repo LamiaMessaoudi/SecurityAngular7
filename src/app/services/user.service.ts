@@ -4,6 +4,8 @@ import {Subject} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {TokenStorageService} from './token-storage.service';
 import {map} from 'rxjs/operators';
+import { environment} from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,7 @@ export class UserService {
       'Content-Type': 'application/json',
       'Authorization': 'access ' + this.tokenStorage.getToken()
    });
-    this.httpClient.get('http://localhost:1111/api/admin/findAllUsers', { headers: reqHeader }).subscribe(
+    this.httpClient.get(environment.apiUrl+'api/admin/findAllUsers', { headers: reqHeader }).subscribe(
       (res: any[]) => {
         this.listUsers = res;
         this.emitUsers();
@@ -44,7 +46,7 @@ export class UserService {
  });
  
   
-  return this.httpClient.delete('http://localhost:1111/api/admin/deleteUser/'+id, { headers: reqHeader })
+  return this.httpClient.delete(environment.apiUrl+'api/admin/deleteUser/'+id, { headers: reqHeader })
   .pipe(map(any=>{
       console.log("succes");
       this.getAllUsers();
@@ -53,7 +55,7 @@ export class UserService {
 updateUser(donn:FormData,idPost:number)
 {
  
-  return this.httpClient.put('http://localhost:1111/api/auth/updateUser/'+idPost,donn)
+  return this.httpClient.put(environment.apiUrl+'api/auth/updateUser/'+idPost,donn)
   .pipe(map(res=>{
    
 
@@ -71,7 +73,7 @@ getCurrentUser()
  });
   const username=this.tokenStorage.getUsername();
   return new Promise((resolve, reject) => {
-  this.httpClient.get('http://localhost:1111/api/admin/getUser/'+username, { headers: reqHeader }).subscribe(
+  this.httpClient.get(environment.apiUrl+'api/admin/getUser/'+username, { headers: reqHeader }).subscribe(
     (res: any[])=>{
         resolve(res);
        this.iduser=res['id'];
